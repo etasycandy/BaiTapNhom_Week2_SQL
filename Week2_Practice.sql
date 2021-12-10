@@ -92,12 +92,6 @@ FROM ITEMS_ORDERED
 WHERE customerid LIKE 10449;
 --Thoả mãn điều kiện customerid = 10449
 
---Câu2:
-SELECT * FROM ITEMS_ORDERED
---Lấy tất cả các biểu thức trong bảng ITEMS_ORDERED
-WHERE item LIKE 'Tent';
---Thoả mãn điều kiện item là 'cái lều'
-
 --Câu3:
 SELECT customerid, order_date, item
 --Lấy 3 biểu thức (customerid, order_date, item) 
@@ -105,12 +99,6 @@ FROM ITEMS_ORDERED
 --Từ bảng ITEMS_ORDERED
 WHERE item LIKE 'S%';
 --Thoả mãn điều kiện item bắt đầu bằng chữ 'S'
-
---Câu4:
-SELECT DISTINCT item
---Lấy ra các item không lặp lại
-FROM ITEMS_ORDERED;
---Từ bảng ITEMS_ORDERED
 
 --Câu5:
 SELECT item, MAX(price) AS maxPrice
@@ -120,29 +108,11 @@ FROM ITEMS_ORDERED
 GROUP BY item;
 --Nhóm lại theo từng item
 
---Câu6:
-SELECT AVG(price) AS trungBinhPrice
---Lấy ra giá trị trung bình của price
-FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
-WHERE order_date LIKE '%12%';
---Thoả mãn điều kiện order_date là tháng 12
-
 --Câu7:
 SELECT COUNT(*) AS totalNumberOfRows
 --Lấy ra số hàng gán cho nó tên là totalNumberOfRows
 FROM ITEMS_ORDERED;
 --Từ bảng ITEMS_ORDERED
-
---Câu8:
-SELECT item, MIN(price) AS minPrice
---Lấy ra item và giá nhỏ nhất của nó
-FROM ITEMS_ORDERED
---Từ bảng ITEMS_ORDERED
-WHERE item LIKE 'Tent'
---Thoả mãn điều kiện item đó là 'cái lều'
-GROUP BY item;
---Nhóm lại theo từng item
 
 --Câu9:
 SELECT state, COUNT(*) AS amountOfPeople
@@ -152,14 +122,6 @@ FROM CUSTOMERS
 GROUP BY state;
 --Nhóm lại theo từng state
 
---Câu10:
-SELECT item, MAX(price) AS maxPrice, MIN(price) AS minPrice
---Lấy ra item, giá lớn nhất, giá nhỏ nhất của item đó
-FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED 
-GROUP BY item;
---Nhóm lại theo từng item
-
 --Câu11:
 SELECT customerid, COUNT(*) AS numberOfOrders, SUM(price) AS sumPrice
 --Lấy ra customerid, số lượng đơn hàng, tổng số tiền từ các đơn hàng
@@ -167,16 +129,6 @@ FROM ITEMS_ORDERED
 --Từ bảng ITEMS_ORDERED
 GROUP BY customerid;
 --Nhóm lại theo từng customerid
-
---Câu12:
-SELECT state, COUNT(customerid) AS amountOfPeople
---Lấy ra từng state và số lượng customerid tại state đó
-FROM CUSTOMERS
---Từ bảng CUSTOMERS
-GROUP BY state 
---Nhóm lại theo từng state 
-HAVING COUNT(customerid) > 1;
---Thoả điều kiện số customerid phải lớn hơn 1
 
 --Câu13:
 SELECT item, MAX(price) AS maxPrice, MIN(price) AS minPrice
@@ -188,16 +140,6 @@ GROUP BY item
 HAVING MAX(price) > 190;
 --Thoả điều kiện giá lớn nhất phải lớn hơn 190.00
 
---Câu14:
-SELECT customerid, COUNT(quantity) AS numberOfOrders, SUM(price) AS sumPrice
---Lấy ra customerid, số lượng đơn hàng, tổng số tiền từ các đơn hàng
-FROM ITEMS_ORDERED
---Từ bảng ITEMS_ORDERED
-GROUP BY customerid 
---Nhóm lại theo từng customerid 
-HAVING COUNT(quantity) > 1;
---Thoả điều kiện số lượng quantity phải lớn hơn 1
-
 --Câu15:
 SELECT firstname, lastname, city
 --Lấy ra 3 biểu thức (firstname, lastname, city)
@@ -205,16 +147,6 @@ FROM CUSTOMERS
 --Từ bảng CUSTOMERS
 ORDER BY firstname;
 --Sắp xếp tăng dần theo firstname
-
---Câu16:
-SELECT customerid, item, price
---Lấy 3 biểu thức (customerid, item, price) 
-FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
-WHERE customerid LIKE 10449
---Thoả mãn điều kiện customerid = 10449
-ORDER BY price DESC;
---Sắp xếp theo giá giảm giần
 
 --Câu17:
 SELECT item, price
@@ -226,14 +158,6 @@ WHERE price > 10
 ORDER BY price
 --Sắp xếp tăng dần theo price
 
---Câu18:
-SELECT customerid, order_date, item
---Lấy ra 3 biểu thức (customerid, order_date, item)
-FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
-WHERE (item <> 'Snow Shoes') AND (item <> 'Ear Muffs');
---Thoả mãn điều kiện item không phải là 'Snow Shoes' và 'Ear Muffs'
-
 --Câu19:
 SELECT item, price
 --Lấy ra 2 biểu thức (item, price)
@@ -241,14 +165,6 @@ FROM ITEMS_ORDERED
 --Từ bảng ITEMS_ORDERED
 WHERE item LIKE '[SPF]%';
 --Thoả mãn điều kiện item bắt đầu bằng 'S','P' hoặc 'F'
-
---Câu20:
-SELECT order_date, item, price
---Lấy ra 3 biểu thức (order_date, item, price)
-FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
-WHERE price BETWEEN 10.00 AND 80.00;
---Thoả mãn price nằm trong khoảng từ 10-80
 
 --Câu21:
 SELECT firstname, city, state
