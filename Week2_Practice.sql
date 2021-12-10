@@ -1,10 +1,10 @@
-﻿--Tạo Database
+--T?o Database
 CREATE DATABASE Week2Practice;
 
---Xoá Database
+--Xo� Database
 --DROP DATABASE Week2Practice;
 
---Tạo bảng CUSTOMERS
+--T?o b?ng CUSTOMERS
 CREATE TABLE CUSTOMERS(
     customerid INT PRIMARY KEY, 
     firstname VARCHAR(25),
@@ -12,10 +12,10 @@ CREATE TABLE CUSTOMERS(
     city CHAR(50),
     state CHAR(50)
 );
---Xoá bảng CUSTOMERS
+--Xo� b?ng CUSTOMERS
 --DROP TABLE CUSTOMERS;
 
---Tạo bảng ITEMS_ORDERED
+--T?o b?ng ITEMS_ORDERED
 CREATE TABLE ITEMS_ORDERED(
     customerid INT, 
     order_date DATE,
@@ -25,10 +25,10 @@ CREATE TABLE ITEMS_ORDERED(
     FOREIGN KEY (customerid) REFERENCES CUSTOMERS(customerid)
 );
 
---Xoá bảng ITEMS_ORDERED
+--Xo� b?ng ITEMS_ORDERED
 --DROP TABLE ITEMS_ORDERED;
 
---Thêm dữ liệu vào bảng CUSTOMERS
+--Th�m d? li?u v�o b?ng CUSTOMERS
 INSERT INTO CUSTOMERS (customerid, firstname, lastname, city, state) VALUES
 (10101,'John','Gray','Lynden','Washington'),
 (10298, 'Leroy', 'Brown', 'Pinetop', 'Arizona'),
@@ -48,7 +48,7 @@ INSERT INTO CUSTOMERS (customerid, firstname, lastname, city, state) VALUES
 (10439, 'Conrad', 'Giles', 'Telluride', 'Colorado'),
 (10449, 'Isabela', 'Moore', 'Yuma', 'Arizona');
 
---Thêm dữ liệu vào bảng ITEMS_ORDERED
+--Th�m d? li?u v�o b?ng ITEMS_ORDERED
 INSERT INTO ITEMS_ORDERED (customerid, order_date, item, quantity, price) VALUES
 (10330, '1999/06/30', 'Pogo stick', 1, 28.00),
 (10101, '1999/06/30', 'Raft',1,58.00),
@@ -84,176 +84,87 @@ INSERT INTO ITEMS_ORDERED (customerid, order_date, item, quantity, price) VALUES
 (10330, '2000/04/19', 'Shovel', 1 , 16.75);
 
 
---Câu1:
-SELECT customerid, item, price
---Lấy 3 biểu thức (customerid, item, price) 
-FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
-WHERE customerid LIKE 10449;
---Thoả mãn điều kiện customerid = 10449
 
---Câu2:
+--C�u2:
 SELECT * FROM ITEMS_ORDERED
---Lấy tất cả các biểu thức trong bảng ITEMS_ORDERED
+--Ch?n t?t c? trong b?ng ITEMS_ORDERED
 WHERE item LIKE 'Tent';
---Thoả mãn điều kiện item là 'cái lều'
+--Khi th?a m�n item l� 'c�i l?u'
 
---Câu3:
-SELECT customerid, order_date, item
---Lấy 3 biểu thức (customerid, order_date, item) 
-FROM ITEMS_ORDERED
---Từ bảng ITEMS_ORDERED
-WHERE item LIKE 'S%';
---Thoả mãn điều kiện item bắt đầu bằng chữ 'S'
-
---Câu4:
+--C�u4:
 SELECT DISTINCT item
---Lấy ra các item không lặp lại
+--Ch?nc�c item kh�ng l?p l?i
 FROM ITEMS_ORDERED;
---Từ bảng ITEMS_ORDERED
+--T? b?ng ITEMS_ORDERED
 
---Câu5:
-SELECT item, MAX(price) AS maxPrice
---Lấy ra item và giá lớn nhất của item đó
-FROM ITEMS_ORDERED
---Từ bảng ITEMS_ORDERED
-GROUP BY item;
---Nhóm lại theo từng item
-
---Câu6:
+--C�u6:
 SELECT AVG(price) AS trungBinhPrice
---Lấy ra giá trị trung bình của price
+--Ch?n gi� tr? trung b�nh c?a price
 FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
+--T? b?ng ITEMS_ORDERED
 WHERE order_date LIKE '%12%';
---Thoả mãn điều kiện order_date là tháng 12
+--Khi Tho? m�n ?i?u ki?n order_date l� th�ng 12
 
---Câu7:
-SELECT COUNT(*) AS totalNumberOfRows
---Lấy ra số hàng gán cho nó tên là totalNumberOfRows
-FROM ITEMS_ORDERED;
---Từ bảng ITEMS_ORDERED
-
---Câu8:
+--C�u8:
 SELECT item, MIN(price) AS minPrice
---Lấy ra item và giá nhỏ nhất của nó
+--Ch?n item v� gi� nh? nh?t c?a n�
 FROM ITEMS_ORDERED
---Từ bảng ITEMS_ORDERED
+--T? b?ng ITEMS_ORDERED
 WHERE item LIKE 'Tent'
---Thoả mãn điều kiện item đó là 'cái lều'
+--Khi th?a m�n item ?� l� 'c�i l?u'
 GROUP BY item;
---Nhóm lại theo từng item
+--Nh�m l?i theo t?ng item
 
---Câu9:
-SELECT state, COUNT(*) AS amountOfPeople
---Lấy ra biểu thức state và đếm số lần xuất hiện
-FROM CUSTOMERS
---Từ bảng CUSTOMERS
-GROUP BY state;
---Nhóm lại theo từng state
-
---Câu10:
+--C�u10:
 SELECT item, MAX(price) AS maxPrice, MIN(price) AS minPrice
---Lấy ra item, giá lớn nhất, giá nhỏ nhất của item đó
+--Ch?n item, gi� l?n nh?t, gi� nh? nh?t c?a item ?�
 FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED 
+--T? b?ng ITEMS_ORDERED 
 GROUP BY item;
---Nhóm lại theo từng item
+--Nh�m l?i theo t?ng item
 
---Câu11:
-SELECT customerid, COUNT(*) AS numberOfOrders, SUM(price) AS sumPrice
---Lấy ra customerid, số lượng đơn hàng, tổng số tiền từ các đơn hàng
-FROM ITEMS_ORDERED
---Từ bảng ITEMS_ORDERED
-GROUP BY customerid;
---Nhóm lại theo từng customerid
-
---Câu12:
+--C�u12:
 SELECT state, COUNT(customerid) AS amountOfPeople
---Lấy ra từng state và số lượng customerid tại state đó
+--Ch?n state v� ??m customerid ??t t�n l� amountOfProple
 FROM CUSTOMERS
---Từ bảng CUSTOMERS
+--T? b?ng CUSTOMERS
 GROUP BY state 
---Nhóm lại theo từng state 
+--Nh�m l?i theo t?ng state 
 HAVING COUNT(customerid) > 1;
---Thoả điều kiện số customerid phải lớn hơn 1
+--Tho? ?i?u ki?n s? customerid ph?i l?n h?n 1
 
---Câu13:
-SELECT item, MAX(price) AS maxPrice, MIN(price) AS minPrice
---Lấy ra từng item, giá lớn nhất, giá nhỏ nhất
-FROM ITEMS_ORDERED
---Từ bảng ITEMS_ORDERED
-GROUP BY item 
---Nhóm lại theo từng item
-HAVING MAX(price) > 190;
---Thoả điều kiện giá lớn nhất phải lớn hơn 190.00
-
---Câu14:
+--C�u14:
 SELECT customerid, COUNT(quantity) AS numberOfOrders, SUM(price) AS sumPrice
---Lấy ra customerid, số lượng đơn hàng, tổng số tiền từ các đơn hàng
+--L?y ra customerid, s? l??ng ??n h�ng ??t t�n l� numberOfOrders, t?ng s? ti?n t? c�c ??n h�ng ??t t�n l� sumPrice
 FROM ITEMS_ORDERED
---Từ bảng ITEMS_ORDERED
+--T? b?ng ITEMS_ORDERED
 GROUP BY customerid 
---Nhóm lại theo từng customerid 
+--Nh�m l?i theo t?ng customerid 
 HAVING COUNT(quantity) > 1;
---Thoả điều kiện số lượng quantity phải lớn hơn 1
+--Tho? ?i?u ki?n s? l??ng quantity ph?i l?n h?n 1
 
---Câu15:
-SELECT firstname, lastname, city
---Lấy ra 3 biểu thức (firstname, lastname, city)
-FROM CUSTOMERS
---Từ bảng CUSTOMERS
-ORDER BY firstname;
---Sắp xếp tăng dần theo firstname
-
---Câu16:
+--C�u16:
 SELECT customerid, item, price
---Lấy 3 biểu thức (customerid, item, price) 
+--Ch?n 3 bi?u th?c (customerid, item, price) 
 FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
+--T? b?ng ITEMS_ORDERED
 WHERE customerid LIKE 10449
---Thoả mãn điều kiện customerid = 10449
+--Tho? m�n ?i?u ki?n customerid = 10449
 ORDER BY price DESC;
---Sắp xếp theo giá giảm giần
+--S?p x?p theo gi� gi?m gi?n
 
---Câu17:
-SELECT item, price
---Lấy ra 2 biểu thức (item, price)
-FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
-WHERE price > 10
---Thoả mãn điều kiện price lớn hơn 10,00
-ORDER BY price
---Sắp xếp tăng dần theo price
-
---Câu18:
+--C�u18:
 SELECT customerid, order_date, item
---Lấy ra 3 biểu thức (customerid, order_date, item)
+--Ch?n ra 3 bi?u th?c (customerid, order_date, item)
 FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
+--T? b?ng ITEMS_ORDERED
 WHERE (item <> 'Snow Shoes') AND (item <> 'Ear Muffs');
---Thoả mãn điều kiện item không phải là 'Snow Shoes' và 'Ear Muffs'
+--Tho? m�n ?i?u ki?n item kh�ng ph?i l� 'Snow Shoes' v� 'Ear Muffs'
 
---Câu19:
-SELECT item, price
---Lấy ra 2 biểu thức (item, price)
-FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
-WHERE item LIKE '[SPF]%';
---Thoả mãn điều kiện item bắt đầu bằng 'S','P' hoặc 'F'
-
---Câu20:
+--C�u20:
 SELECT order_date, item, price
---Lấy ra 3 biểu thức (order_date, item, price)
+--Ch?n ra 3 bi?u th?c (order_date, item, price)
 FROM ITEMS_ORDERED 
---Từ bảng ITEMS_ORDERED
+--T? b?ng ITEMS_ORDERED
 WHERE price BETWEEN 10.00 AND 80.00;
---Thoả mãn price nằm trong khoảng từ 10-80
-
---Câu21:
-SELECT firstname, city, state
---Lấy ra 3 biểu thức (firstname, city, state)
-FROM CUSTOMERS
---Từ bảng CUSTOMERS
-WHERE state LIKE 'Arizona' OR state LIKE 'Washington' OR state LIKE 'Oklahoma' OR state LIKE 'Colorado' OR state LIKE 'Hawaii';
---Thoả mãn điều kiện state là Arizona, Washington, Oklahoma, Colorado hoặc Hawaii.
+--Tho? m�n price n?m trong kho?ng t? 10-80
